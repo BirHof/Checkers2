@@ -2,8 +2,7 @@ import checkers_utiles
 
 
 class Node:
-    def __init__(self, data=None, x=None, y=None):
-        #self.data = data
+    def __init__(self, x=None, y=None):
         self.x = x
         self.y = y
         self.left = None
@@ -12,8 +11,8 @@ class Node:
 
 
 class BinaryTree:
-    def __init__(self, data=None, x=None, y=None):
-        self.root = Node(data, x, y)
+    def __init__(self, x=None, y=None):
+        self.root = Node(x, y)
 
     @classmethod
     def getLeafCount(cls, node):
@@ -82,47 +81,6 @@ class BinaryTree:
                 return rDepth + 1
 
 
-
-
-'''
-# Driver program to test above function
-root = BinaryTree(data=11, x=1, y=2)
-root.left = Node(data=12, x=3, y=4)
-root.right = Node(data=13, x=5, y=6)
-root.left.left = Node(data=14, x=7, y=8)
-root.left.right = Node(data=15, x=9, y=2)
-root.right.left = Node(data=16, x=6, y=5)
-root.right.right = Node(data=17, x=4, y=9)
-
-print(f"Leaf count of the tree is {root.getLeafCount(root)}")
-
-for val in range(11, 18):
-    print(f"is {val} In Leaf? {root.isValueInLeaf(root, val)}")
-
-ind_x = 4
-ind_y = 9
-print(f"is x={ind_x} y={ind_y} in Leaf? {root.isIndexInLeaf(root, ind_x, ind_y)}")
-'''
-
-
-'''
-def chainer(node):
-    if node.data != 0:
-        new_node = Node(data=node.data - 1)
-        node.left = new_node
-        chainer(new_node)
-
-
-tree = BinaryTree(data=3, x=1, y=1)
-chainer(tree.root)
-print(tree.root.data)
-print(tree.root.left.data)
-print(tree.root.left.left.data)
-print(tree.root.left.left.left.data)
-print(tree.root.left.left.left.left)
-'''
-
-
 def chainCaptures(node, player, board_state):
     # chain to the left:
     x1 = node.x + 2 * player
@@ -139,46 +97,4 @@ def chainCaptures(node, player, board_state):
         new_node = Node(x=x1, y=y1)
         node.right = new_node
         chainCaptures(node=new_node, player=player, board_state=board_state)
-
-
-
-if __name__ == '__main__':
-    print(f"Start run binary tree....")
-    state_2 = [
-        [0,  1,  0,  1,  0,  1,  0, 1],
-        [1,  0,  1,  0,  1,  0,  1, 0],
-        [0, -1,  0,  1,  0,  1,  0, 1],
-        [0,  0,  0,  0, -1,  0,  0, 0],
-        [0,  0,  0, -1,  0,  0,  0, 0],
-        [-1, 0, -1,  0, -1,  0, -1, 0],
-        [0, -1,  0,  0,  0, -1,  0, 0],
-        [-1, 0, -1,  0, -1,  0, -1, 0],
-    ]
-
-    #tree = BinaryTree(x=3, y=2)
-    tree = BinaryTree(x=0, y=0)
-    chainCaptures(tree.root, player=1, board_state=state_2)
-
-    '''
-    print(f"node_0   X,Y = {tree.root.x},{tree.root.y}")
-    print(f"node_1   X,Y = {tree.root.left.x},{tree.root.left.y}")
-    print(f"node_2   X,Y = {tree.root.left.left.x},{tree.root.left.left.y}")
-    '''
-
-    ind_x = 3
-    ind_y = 6
-    print(f"is x={ind_x} y={ind_y} in Leaf? {tree.isIndexInLeaf(tree.root, ind_x, ind_y)}")
-
-    tree_depth = tree.maxDepth(tree.root)
-    print(f"Max depth: {tree_depth}")
-
-    ans = tree.nodesToTargetLeaf(tree.root, ind_x, ind_y)
-
-    while_node = tree.root
-    while while_node:
-        print(f"node   X,Y = {while_node.x},{while_node.y}")
-        while_node = while_node.next
-
-
-    z = 770
 

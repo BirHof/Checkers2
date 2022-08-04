@@ -96,9 +96,6 @@ def validate_single_capture(player, x0, y0, x1, y1, board_state):
     return True
 
 
-    return True
-
-
 def is_additional_capture(player, x0, y0, board_state):
     # Check to the left:
     x1 = x0 + 2 * player
@@ -177,7 +174,6 @@ def apply_multiple_steps(board_state, move, origin_tree):
     else:
         current_node = origin_tree.root
         while current_node.next:
-            #print(f"node   X,Y = {current_node.x},{current_node.y}")
             move = [current_node.x, current_node.y, current_node.next.x, current_node.next.y]
             board_state = apply_single_step(board_state, move, is_capture=True)
             current_node = current_node.next
@@ -222,51 +218,8 @@ def is_game_complete(board_state, player):
         message = players[player] + ' plater has an optional simple move to make'
         return False, message
 
-    return True, "Bye"
+    return True, ""
 
 
 if __name__ == '__main__':
-    state_1 = [
-        [0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0],
-        [0, 1, 0, 1, 0, 1, 0, 1],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0],
-        [-1, 0, -1, 0, -1, 0, -1, 0],
-        [0, -1, 0, -1, 0, -1, 0, -1],
-        [-1, 0, -1, 0, -1, 0, -1, 0],
-    ]
-    print(validate_single_capture(player=1, x0=1, y0=2, x1=3, y1=4, board_state=state_1))
-
-    state_2 = [
-        [0, 1, 0, 1, 0, 1, 0, 1],
-        [1, 0, 1, 0, 1, 0, 1, 0],
-        [0, -1, 0, 1, 0, 1, 0, 1],
-        [0, 0, 0, 0, -1, 0, 0, 0],
-        [0, 0, 0, -1, 0, 0, 0, 0],
-        [-1, 0, -1, 0, -1, 0, -1, 0],
-        [0, -1, 0, 0, 0, -1, 0, 0],
-        [-1, 0, -1, 0, -1, 0, -1, 0],
-    ]
-
-    tree = binary_tree.BinaryTree(x=3, y=2)
-    #tree = binary_tree.BinaryTree(x=0, y=0)
-    chain_all_optional_captures(tree.root, player=1, board_state=state_2)
-
-    ind_x = 3
-    ind_y = 6
-    print(f"is x={ind_x} y={ind_y} in Leaf? {tree.isIndexInLeaf(tree.root, ind_x, ind_y)}")
-
-    tree_depth = tree.maxDepth(tree.root)
-    print(f"Max depth: {tree_depth}")
-
-    ans = tree.nodesToTargetLeaf(tree.root, ind_x, ind_y)
-
-    board_state = state_2
-    while_node = tree.root
-    print(f"origin node   X,Y = {while_node.x},{while_node.y}")
-    while while_node.next:
-        print(f"move to node   X,Y = {while_node.next.x},{while_node.next.y}")
-        move = [while_node.x, while_node.y, while_node.next.x, while_node.next.y]
-        board_state = apply_single_step(board_state, move, is_capture=True)
-        while_node = while_node.next
+    pass
